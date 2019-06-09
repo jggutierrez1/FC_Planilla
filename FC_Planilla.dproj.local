@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/06/06 11:04:21.000.310,=C:\Users\Optiplex\Documents\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2019/06/06 11:06:43.000.825,C:\Users\Optiplex\Documents\Embarcadero\Studio\Projects\Unit2.dfm=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\main.dfm</Transaction>
+    <Transaction>2019/06/06 11:06:43.000.825,C:\Users\Optiplex\Documents\Embarcadero\Studio\Projects\Unit2.pas=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\main.pas</Transaction>
+    <Transaction>2019/06/06 11:06:51.000.449,C:\Users\Optiplex\Documents\Embarcadero\Studio\Projects\Project2.dproj=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\FC_Planilla.dproj</Transaction>
+    <Transaction>2019/06/06 11:14:28.000.474,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\About.pas</Transaction>
+    <Transaction>2019/06/06 11:14:58.000.549,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\AdjustGrid.pas</Transaction>
+    <Transaction>2019/06/06 11:14:58.000.909,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\BuscarGen.pas</Transaction>
+    <Transaction>2019/06/06 11:14:58.000.600,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\Base64.pas</Transaction>
+    <Transaction>2019/06/06 11:14:58.000.524,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\acceso.pas</Transaction>
+    <Transaction>2019/06/06 11:14:58.000.574,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\AdjustGridEh.pas</Transaction>
+    <Transaction>2019/06/06 11:14:59.000.407,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\BuscarGenM.pas</Transaction>
+    <Transaction>2019/06/06 11:14:59.000.649,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\BuscarGenM2.pas</Transaction>
+    <Transaction>2019/06/06 11:15:00.000.378,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\Database_Backup_Restore.pas</Transaction>
+    <Transaction>2019/06/06 11:15:01.000.860,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\Empresa.pas</Transaction>
+    <Transaction>2019/06/06 11:15:01.000.888,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\NetworkFunctions.pas</Transaction>
+    <Transaction>2019/06/06 11:15:01.000.975,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\sndkey32.pas</Transaction>
+    <Transaction>2019/06/06 11:15:01.000.217,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\edita_reporte.pas</Transaction>
+    <Transaction>2019/06/06 11:15:01.000.918,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\Nwtools.pas</Transaction>
+    <Transaction>2019/06/06 11:15:01.000.947,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\Reportes.pas</Transaction>
+    <Transaction>2019/06/06 11:15:02.000.240,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\SplashForm2.pas</Transaction>
+    <Transaction>2019/06/06 11:15:02.000.086,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\SplashForm.pas</Transaction>
+    <Transaction>2019/06/06 11:15:03.000.779,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\TecladoGen2.pas</Transaction>
+    <Transaction>2019/06/06 11:15:03.000.022,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\SrvConf.pas</Transaction>
+    <Transaction>2019/06/06 11:15:03.000.551,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\TecladoGen1.pas</Transaction>
+    <Transaction>2019/06/06 11:15:04.000.146,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\usuarios.pas</Transaction>
+    <Transaction>2019/06/06 11:15:04.000.420,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\UtilesV20.pas</Transaction>
+    <Transaction>2019/06/06 11:15:04.000.175,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\UTEval.pas</Transaction>
+    <Transaction>2019/06/06 11:20:17.000.731,C:\Users\Optiplex\Documents\GitHub\FC_Planilla\BuscarGenM.pas=</Transaction>
+    <Transaction>2019/06/06 11:20:29.000.077,C:\Users\Optiplex\Documents\GitHub\FC_Planilla\Database_Backup_Restore.pas=</Transaction>
+    <Transaction>2019/06/06 11:21:14.000.551,=C:\Users\Optiplex\Documents\GitHub\FC_Planilla\acceso1.pas</Transaction>
+    <Transaction>2019/06/06 17:40:12.000.832,=C:\Shared\Rep_Dev\FC_Planilla\Unit1.pas</Transaction>
+    <Transaction>2019/06/06 17:41:11.000.194,C:\Shared\Rep_Dev\FC_Planilla\Unit1.pas=C:\Shared\Rep_Dev\FC_Planilla\impuestos.pas</Transaction>
+    <Transaction>2019/06/06 17:41:11.000.194,C:\Shared\Rep_Dev\FC_Planilla\Unit1.dfm=C:\Shared\Rep_Dev\FC_Planilla\impuestos.dfm</Transaction>
+    <Transaction>2019/06/06 18:04:40.000.878,C:\Shared\Rep_Dev\FC_Planilla\impuestos.dfm=C:\Shared\Rep_Dev\FC_Planilla\imp_fijoss.dfm</Transaction>
+    <Transaction>2019/06/06 18:04:40.000.878,C:\Shared\Rep_Dev\FC_Planilla\impuestos.pas=C:\Shared\Rep_Dev\FC_Planilla\imp_fijoss.pas</Transaction>
+    <Transaction>2019/06/06 18:04:44.000.967,C:\Shared\Rep_Dev\FC_Planilla\imp_fijoss.pas=C:\Shared\Rep_Dev\FC_Planilla\imp_fijos.pas</Transaction>
+    <Transaction>2019/06/06 18:04:44.000.967,C:\Shared\Rep_Dev\FC_Planilla\imp_fijoss.dfm=C:\Shared\Rep_Dev\FC_Planilla\imp_fijos.dfm</Transaction>
+    <Transaction>2019/06/07 09:28:32.671,=C:\Shared\Rep_Dev\FC_Planilla\Unit1.pas</Transaction>
+    <Transaction>2019/06/07 09:30:04.171,C:\Shared\Rep_Dev\FC_Planilla\Mant_Personal.pas=C:\Shared\Rep_Dev\FC_Planilla\Unit1.pas</Transaction>
+    <Transaction>2019/06/07 09:30:04.171,C:\Shared\Rep_Dev\FC_Planilla\Mant_Personal.dfm=C:\Shared\Rep_Dev\FC_Planilla\Unit1.dfm</Transaction>
+    <Transaction>2019/06/07 20:40:37.206,=C:\Shared\Rep_Dev\FC_Planilla\Mant_Acreedores.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,86 @@
+unit impuestos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, PngBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.ComCtrls, Vcl.Mask, DBCtrlsEh,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
+  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS,
+  FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TForm1 = class(TForm)
+    StatusBar1: TStatusBar;
+    oBtnExit: TPngBitBtn;
+    oBtnAbort: TPngBitBtn;
+    oBtnSave: TPngBitBtn;
+    oBtnDelete: TPngBitBtn;
+    oBtnEdit: TPngBitBtn;
+    oBtnNew: TPngBitBtn;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    oPorc_SegS: TDBNumberEditEh;
+    Label1: TLabel;
+    oPorc_SegE: TDBNumberEditEh;
+    Label2: TLabel;
+    Label3: TLabel;
+    oPorc_Isr1: TDBNumberEditEh;
+    Label4: TLabel;
+    oPorc_Isr2: TDBNumberEditEh;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    oConection: TFDConnection;
+    otImp_Fijos: TFDTable;
+    oDS_Imp_Fijos: TDataSource;
+    procedure FormCreate(Sender: TObject);
+    procedure oBtnExitClick(Sender: TObject);
+    procedure oBtnDeleteClick(Sender: TObject);
+    procedure oBtnNewClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+ uses utilesv20;
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  freeandnil(oConection);
+  // self.ResizeKit1.Enabled := utiles.Ctrl_Resize;
+  self.PageControl1.ActivePageIndex := 0;
+  self.otImp_Fijos.Connection := futilesv20.oPublicCnn;
+  self.otImp_Fijos.Active := true;
+  self.oDS_Imp_Fijos.Enabled := true;
+
+end;
+
+procedure TForm1.oBtnDeleteClick(Sender: TObject);
+begin
+self.otImp_Fijos.Delete;
+end;
+
+procedure TForm1.oBtnExitClick(Sender: TObject);
+begin
+close;
+end;
+
+procedure TForm1.oBtnNewClick(Sender: TObject);
+begin
+  self.PageControl1.ActivePageIndex := 0;
+  self.otImp_Fijos.Insert;
+  self.Action_Control(1);
+  self.Activa_Objetos(true);
+  self.otImp_Fijos.FieldByName('Porc_Seg').Value := 0;
+ self.oPorc_SegS.SetFocus;
+end;
+
+end.

@@ -1,0 +1,219 @@
+unit Main;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, Menus, ToolWin, ComCtrls, StdCtrls, Buttons, ExtCtrls,
+  XPMan, Vcl.Imaging.jpeg, math, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin,
+  dxSkinMetropolis, dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark, dxSkinPumpkin,
+  dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, dxNavBar, cxClasses, dxNavBarBase, dxNavBarCollns,
+  dxNavBarGroupItems;
+
+type
+  TfMain = class(TForm)
+    StatusBar1: TStatusBar;
+    dxNavBar1: TdxNavBar;
+    oPersonal: TdxNavBarGroup;
+    oParametros: TdxNavBarGroup;
+    oAgentes_Credito: TdxNavBarGroup;
+    oOpt_Imp_Fijos: TdxNavBarItem;
+    oOpt_Mant_Pers: TdxNavBarItem;
+    oOpt_Dedu_Pers: TdxNavBarItem;
+    oOpt_Rem_Cheq_Acr: TdxNavBarItem;
+    oOpt_Rem_Cheq_Pers: TdxNavBarItem;
+    oPlanilla: TdxNavBarGroup;
+    oSalir: TdxNavBarGroup;
+    oOpt_Salir: TdxNavBarItem;
+    oOpt_Mant_Emp: TdxNavBarItem;
+    oOpt_Mant_Prov: TdxNavBarItem;
+
+    procedure FormCreate(Sender: TObject);
+    procedure Usuarios1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormPaint(Sender: TObject);
+    function CropRect(const Dest: TRect; SrcWidth, SrcHeight: Integer): TRect;
+    procedure FormShow(Sender: TObject);
+    procedure oOpt_Imp_FijosClick(Sender: TObject);
+    procedure oOpt_Dedu_PersClick(Sender: TObject);
+    procedure oOpt_Mant_PersClick(Sender: TObject);
+    procedure oOpt_Rem_Cheq_AcrClick(Sender: TObject);
+    procedure oOpt_Rem_Cheq_PersClick(Sender: TObject);
+    procedure oOpt_SalirClick(Sender: TObject);
+    procedure oOpt_Mant_EmpClick(Sender: TObject);
+    procedure oOpt_Mant_ProvClick(Sender: TObject);
+  private
+    { Private declarations }
+    FGraphic: TGraphic;
+  public
+    { Public declarations }
+  end;
+
+var
+  fMain: TfMain;
+
+implementation
+
+uses
+  acceso, About, Empresa, UtilesV20, usuarios, Base64, Imp_fijos, Mant_Personal, Mant_Acreedores;
+{$R *.dfm}
+
+// Database_Backup_Restore,
+procedure TfMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FGraphic.free;
+  fUtilesV20.close;
+  fUtilesV20.free;
+end;
+
+procedure TfMain.FormCreate(Sender: TObject);
+begin
+  fUtilesV20.Visible := false;
+  Application.CreateForm(Tfacceso, facceso);
+  facceso.ShowModal;
+
+  if (facceso.iPassOk = false) then
+  begin
+    facceso.free;
+    Application.Terminate;
+    system.Halt;
+  end
+  else
+  begin
+    self.StatusBar1.Panels[0].Text := 'Usuario: ' + UtilesV20.sUserName;
+    self.StatusBar1.Panels[1].Text := 'Fecha: ' + formatDateTime('dd/mm/yyyy', now());
+    self.StatusBar1.Panels[2].Text := 'Empresa: ' + facceso.oLst_emp.Text;
+    self.StatusBar1.Panels[3].Text := 'Servidor: ' + fUtilesV20.oPublicCnn.Params.Values['Server'] + '/' +
+      fUtilesV20.oPublicCnn.Params.Values['Database'];
+    facceso.free;
+  end;
+
+  // FGraphic := TJPEGImage.Create;
+  // FGraphic.LoadFromFile(ExtractFilePath(ParamStr(0)) + '/Img_Backg.jpg');
+  fUtilesV20.Visible := false;
+end;
+
+procedure TfMain.FormPaint(Sender: TObject);
+// var
+// R: TRect;
+begin
+  // R := CropRect(ClientRect, FGraphic.Width, FGraphic.Height);
+  // Canvas.StretchDraw(R, FGraphic);
+end;
+
+procedure TfMain.FormShow(Sender: TObject);
+begin
+  FormatSettings.DecimalSeparator := '.';
+  FormatSettings.ThousandSeparator := ',';
+  FormatSettings.CurrencyDecimals := 2;
+  FormatSettings.DateSeparator := '/';
+  FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
+  FormatSettings.LongDateFormat := 'dd/mm/yyyy';
+  FormatSettings.TimeSeparator := ':';
+  FormatSettings.TimeAMString := 'AM';
+  FormatSettings.TimePMString := 'PM';
+  FormatSettings.ShortTimeFormat := 'hh:nn';
+  FormatSettings.LongTimeFormat := 'hh:nn:ss';
+  FormatSettings.CurrencyString := '$';
+
+  if (UtilesV20.Is_Super_User() = true) then
+  begin
+    // self.Usuarios1.Visible := true;
+    // self.c1.Visible := true;
+    // self.Configuracin1.Visible := true;
+  end
+  else
+  begin
+    /// self.Usuarios1.Visible := false;
+    // self.c1.Visible := false;
+    // self.Configuracin1.Visible := false;
+  end;
+
+end;
+
+procedure TfMain.oOpt_Rem_Cheq_AcrClick(Sender: TObject);
+begin
+  messagedlg('cheques1', mtError, mbOKCancel, 0);
+
+end;
+
+procedure TfMain.oOpt_Rem_Cheq_PersClick(Sender: TObject);
+begin
+  messagedlg('cheques2', mtError, mbOKCancel, 0);
+
+end;
+
+procedure TfMain.oOpt_Dedu_PersClick(Sender: TObject);
+begin
+  messagedlg('Deducciones', mtError, mbOKCancel, 0);
+end;
+
+procedure TfMain.oOpt_Mant_EmpClick(Sender: TObject);
+begin
+  Application.CreateForm(TfEmpresa, fEmpresa);
+  fEmpresa.ShowModal;
+  freeandnil(fEmpresa);
+end;
+
+procedure TfMain.oOpt_SalirClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TfMain.oOpt_Imp_FijosClick(Sender: TObject);
+begin
+  Application.CreateForm(TfImp_fijos, fImp_fijos);
+  fImp_fijos.ShowModal;
+  freeandnil(fImp_fijos);
+end;
+
+procedure TfMain.oOpt_Mant_PersClick(Sender: TObject);
+begin
+  Application.CreateForm(TfMant_Personal, fMant_Personal);
+  fMant_Personal.ShowModal;
+  freeandnil(fMant_Personal);
+end;
+
+procedure TfMain.oOpt_Mant_ProvClick(Sender: TObject);
+begin
+  Application.CreateForm(TfMant_Acreedores, fMant_Acreedores);
+  fMant_Acreedores.ShowModal;
+  freeandnil(fMant_Acreedores);
+end;
+
+procedure TfMain.Usuarios1Click(Sender: TObject);
+begin
+  if (trim(UtilesV20.sUserName) <> 'ADMIN') and (trim(UtilesV20.sUserName) <> 'SUPER') then
+  begin
+    messagedlg('Usuario no tiene acceso a esta opción.', mtWarning, [mbOk], 0);
+    exit;
+  end;
+  Application.CreateForm(TFusuarios, Fusuarios);
+  Fusuarios.ShowModal;
+  freeandnil(Fusuarios);
+end;
+
+function TfMain.CropRect(const Dest: TRect; SrcWidth, SrcHeight: Integer): TRect;
+var
+  W: Integer;
+  H: Integer;
+  Scale: Single;
+  X, Y, Z: Integer;
+begin
+  W := Dest.Right - Dest.Left;
+  H := Dest.Bottom - Dest.Top;
+  Scale := Max(W / SrcWidth, H / SrcHeight);
+  X := (W - Round(SrcWidth * Scale)) div 2;
+  Y := (H - Round(SrcHeight * Scale)) div 2;
+  with Dest do
+    Result := Rect((Left + X), (Top + Y), (Right - X), (Bottom - Y));
+end;
+
+end.
+
