@@ -181,8 +181,6 @@ object fMant_Acreedores: TfMant_Acreedores
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 28
       object Label5: TLabel
         Left = 33
         Top = 18
@@ -351,7 +349,6 @@ object fMant_Acreedores: TfMant_Acreedores
     Width = 714
     Height = 19
     Panels = <>
-    ExplicitWidth = 713
   end
   object oBtnExit: TPngBitBtn
     Tag = 8
@@ -698,7 +695,7 @@ object fMant_Acreedores: TfMant_Acreedores
   end
   object oBtnSave: TPngBitBtn
     Tag = 6
-    Left = 482
+    Left = 480
     Top = 379
     Width = 109
     Height = 57
@@ -1244,7 +1241,7 @@ object fMant_Acreedores: TfMant_Acreedores
   end
   object oBtnPrint: TPngBitBtn
     Tag = 5
-    Left = 447
+    Left = 452
     Top = 438
     Width = 109
     Height = 57

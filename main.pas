@@ -5,15 +5,24 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, ToolWin, ComCtrls, StdCtrls, Buttons, ExtCtrls,
-  XPMan, Vcl.Imaging.jpeg, math, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore, dxSkinBlack, dxSkinBlue,
-  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide, dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle,
-  dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin,
-  dxSkinMetropolis, dxSkinMetropolisDark, dxSkinMoneyTwins, dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
-  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
-  dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinOffice2016Colorful, dxSkinOffice2016Dark, dxSkinPumpkin,
-  dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
-  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine, dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
-  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint, dxSkinXmas2008Blue, dxNavBar, cxClasses, dxNavBarBase, dxNavBarCollns,
+  XPMan, Vcl.Imaging.jpeg, math, cxGraphics, cxControls, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinBlack, dxSkinBlue,
+  dxSkinBlueprint, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinDevExpressDarkStyle, dxSkinDevExpressStyle,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast, dxSkiniMaginary,
+  dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin,
+  dxSkinMetropolis, dxSkinMetropolisDark, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver,
+  dxSkinOffice2013DarkGray, dxSkinOffice2013LightGray, dxSkinOffice2013White,
+  dxSkinOffice2016Colorful, dxSkinOffice2016Dark, dxSkinPumpkin,
+  dxSkinSeven, dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
+  dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
+  dxSkinTheAsphaltWorld, dxSkinsDefaultPainters, dxSkinValentine,
+  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
+  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
+  dxSkinXmas2008Blue, dxNavBar, cxClasses, dxNavBarBase, dxNavBarCollns,
   dxNavBarGroupItems;
 
 type
@@ -61,7 +70,8 @@ var
 implementation
 
 uses
-  acceso, About, Empresa, UtilesV20, usuarios, Base64, Imp_fijos, Mant_Personal, Mant_Acreedores;
+  acceso, About, Empresa, UtilesV20, usuarios, Base64, Imp_fijos, Mant_Personal,
+  Mant_Acreedores, planilla_remesa;
 {$R *.dfm}
 
 // Database_Backup_Restore,
@@ -87,9 +97,11 @@ begin
   else
   begin
     self.StatusBar1.Panels[0].Text := 'Usuario: ' + UtilesV20.sUserName;
-    self.StatusBar1.Panels[1].Text := 'Fecha: ' + formatDateTime('dd/mm/yyyy', now());
+    self.StatusBar1.Panels[1].Text := 'Fecha: ' +
+      formatDateTime('dd/mm/yyyy', now());
     self.StatusBar1.Panels[2].Text := 'Empresa: ' + facceso.oLst_emp.Text;
-    self.StatusBar1.Panels[3].Text := 'Servidor: ' + fUtilesV20.oPublicCnn.Params.Values['Server'] + '/' +
+    self.StatusBar1.Panels[3].Text := 'Servidor: ' +
+      fUtilesV20.oPublicCnn.Params.Values['Server'] + '/' +
       fUtilesV20.oPublicCnn.Params.Values['Database'];
     facceso.free;
   end;
@@ -145,8 +157,9 @@ end;
 
 procedure TfMain.oOpt_Rem_Cheq_PersClick(Sender: TObject);
 begin
-  messagedlg('cheques2', mtError, mbOKCancel, 0);
-
+  Application.CreateForm(Tfplanilla_remesa, fplanilla_remesa);
+  fplanilla_remesa.ShowModal;
+  freeandnil(fplanilla_remesa);
 end;
 
 procedure TfMain.oOpt_Dedu_PersClick(Sender: TObject);
@@ -189,7 +202,8 @@ end;
 
 procedure TfMain.Usuarios1Click(Sender: TObject);
 begin
-  if (trim(UtilesV20.sUserName) <> 'ADMIN') and (trim(UtilesV20.sUserName) <> 'SUPER') then
+  if (trim(UtilesV20.sUserName) <> 'ADMIN') and
+    (trim(UtilesV20.sUserName) <> 'SUPER') then
   begin
     messagedlg('Usuario no tiene acceso a esta opción.', mtWarning, [mbOk], 0);
     exit;
@@ -199,7 +213,8 @@ begin
   freeandnil(Fusuarios);
 end;
 
-function TfMain.CropRect(const Dest: TRect; SrcWidth, SrcHeight: Integer): TRect;
+function TfMain.CropRect(const Dest: TRect;
+  SrcWidth, SrcHeight: Integer): TRect;
 var
   W: Integer;
   H: Integer;

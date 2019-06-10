@@ -15,7 +15,7 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
   FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef,
-  FireDAC.VCLUI.Wait;
+  FireDAC.VCLUI.Wait, ResizeKit;
 
 type
   TfEmpresa = class(TForm)

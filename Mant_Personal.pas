@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls,
   Vcl.Buttons, PngBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls, DBGridEh, DBCtrlsEh, DBLookupEh, Vcl.ExtDlgs, DateUtils,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  ResizeKit, MemTableDataEh, MemTableEh;
 
 type
   TfMant_Personal = class(TForm)
@@ -89,6 +90,14 @@ type
     otAgent_Cred: TFDTable;
     oDs_Agent_Cred: TDataSource;
     oBtn_Adm_Acr: TPngBitBtn;
+    otPpersonal_deduc: TFDTable;
+    oDs_Personal_deduc: TDataSource;
+    MemTableEh1: TMemTableEh;
+    MemTableEh1tipo: TIntegerField;
+    MemTableEh1descripcion: TStringField;
+    Label7: TLabel;
+    DBNumberEditEh1: TDBNumberEditEh;
+    PngBitBtn1: TPngBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Activa_Objetos(bPar: boolean);
@@ -134,8 +143,12 @@ begin
   self.PageControl1.ActivePageIndex := 0;
   self.otPersonal.Connection := futilesv20.oPublicCnn;
   self.otSecuenc.Connection := futilesv20.oPublicCnn;
+  self.otPpersonal_deduc.Connection := futilesv20.oPublicCnn;
+  self.otAgent_Cred.Connection := futilesv20.oPublicCnn;
   self.otPersonal.Active := true;
   self.otSecuenc.Active := true;
+  self.otAgent_Cred.Active := true;
+  self.otPpersonal_deduc.Active := true;
   self.oDS_Personal.Enabled := true;
   self.AssgnTabs;
 end;

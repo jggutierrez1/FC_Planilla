@@ -179,8 +179,6 @@ object fEmpresa: TfEmpresa
       Font.Name = 'Segoe UI'
       Font.Style = []
       ParentFont = False
-      ExplicitTop = 24
-      ExplicitHeight = 341
       object Label5: TLabel
         Left = 40
         Top = 18
@@ -603,7 +601,6 @@ object fEmpresa: TfEmpresa
     Width = 713
     Height = 19
     Panels = <>
-    ExplicitTop = 508
   end
   object oBtnExit: TPngBitBtn
     Tag = 8

@@ -5,7 +5,7 @@ object Facceso: TFacceso
   Caption = 'INICIO DE SESI'#211'N.'
   ClientHeight = 305
   ClientWidth = 650
-  Color = clInactiveCaption
+  Color = clWhite
   DefaultMonitor = dmPrimary
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -6737,12 +6737,12 @@ object Facceso: TFacceso
   object oBtn_OK: TPngBitBtn
     Tag = 1
     Left = 170
-    Top = 227
+    Top = 231
     Width = 109
     Height = 53
     Align = alCustom
     BiDiMode = bdLeftToRight
-    Caption = 'OK'
+    Caption = 'ENTARR'
     Default = True
     ParentBiDiMode = False
     TabOrder = 5
@@ -6752,12 +6752,12 @@ object Facceso: TFacceso
   object oBtn_Cancel: TPngBitBtn
     Tag = 1
     Left = 338
-    Top = 227
+    Top = 231
     Width = 109
     Height = 53
     Align = alCustom
     BiDiMode = bdLeftToRight
-    Caption = '&Close'
+    Caption = '&SALIR'
     ParentBiDiMode = False
     TabOrder = 6
     OnClick = oBtn_CancelClick

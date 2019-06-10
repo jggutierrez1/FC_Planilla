@@ -343,8 +343,8 @@ object fMant_Personal: TfMant_Personal
   end
   object oBtnAbort: TPngBitBtn
     Tag = 7
-    Left = 606
-    Top = 445
+    Left = 607
+    Top = 441
     Width = 109
     Height = 57
     Align = alCustom
@@ -1154,16 +1154,13 @@ object fMant_Personal: TfMant_Personal
     Width = 724
     Height = 19
     Panels = <>
-    ExplicitLeft = 520
-    ExplicitTop = 512
-    ExplicitWidth = 0
   end
   object PageControl1: TPageControl
     Left = 8
     Top = 56
     Width = 708
     Height = 425
-    ActivePage = TabSheet2
+    ActivePage = TabSheet1
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
@@ -1261,8 +1258,8 @@ object fMant_Personal: TfMant_Personal
       object Label15: TLabel
         Left = 334
         Top = 92
-        Width = 69
-        Height = 33
+        Width = 65
+        Height = 30
         Caption = 'fechade Nacimiento:'
         WordWrap = True
       end
@@ -1308,9 +1305,17 @@ object fMant_Personal: TfMant_Personal
       object Label25: TLabel
         Left = 334
         Top = 196
-        Width = 68
-        Height = 45
+        Width = 67
+        Height = 30
         Caption = 'fecha de Fin relaci'#243'n:'
+        WordWrap = True
+      end
+      object Label7: TLabel
+        Left = 334
+        Top = 232
+        Width = 100
+        Height = 30
+        Caption = 'Total Deducciones por pagar:'
         WordWrap = True
       end
       object oPer_num: TDBEdit
@@ -1476,7 +1481,7 @@ object fMant_Personal: TfMant_Personal
       end
       object oEdad: TDBNumberEditEh
         Left = 456
-        Top = 133
+        Top = 137
         Width = 73
         Height = 23
         DisplayFormat = '###0'
@@ -1548,18 +1553,40 @@ object fMant_Personal: TfMant_Personal
         TabOrder = 17
         Visible = True
       end
+      object DBNumberEditEh1: TDBNumberEditEh
+        Left = 456
+        Top = 233
+        Width = 73
+        Height = 23
+        DataField = 'per_desc_por_pagar'
+        DataSource = oDS_Personal
+        DisplayFormat = '###,###,##0.00'
+        DynProps = <>
+        EditButtons = <>
+        ReadOnly = True
+        TabOrder = 21
+        Visible = True
+      end
+      object PngBitBtn1: TPngBitBtn
+        Tag = 1
+        Left = 535
+        Top = 231
+        Width = 34
+        Height = 28
+        Caption = #425
+        TabOrder = 22
+      end
     end
     object TabSheet2: TTabSheet
       Caption = 'Deducciones'
       ImageIndex = 1
-      ExplicitTop = 24
-      ExplicitHeight = 355
+      ExplicitLeft = 0
       object DBGridEh1: TDBGridEh
-        Left = 16
-        Top = 16
-        Width = 665
+        Left = 3
+        Top = 3
+        Width = 694
         Height = 292
-        DataSource = oDs_Agent_Cred
+        DataSource = oDs_Personal_deduc
         DynProps = <>
         FooterRowCount = 1
         IndicatorOptions = []
@@ -1571,30 +1598,22 @@ object fMant_Personal: TfMant_Personal
             CellButtons = <>
             DynProps = <>
             EditButtons = <>
-            FieldName = 'codigo'
-            Footers = <>
-            MaxWidth = 80
-            Title.Caption = 'C'#243'digo'
-            Width = 80
-          end
-          item
-            CellButtons = <>
-            DynProps = <>
-            EditButtons = <>
-            FieldName = 'nombre'
-            Footer.FieldName = 'codigo'
+            Footer.FieldName = 'dedu_acre_id'
             Footer.ValueType = fvtCount
             Footers = <>
-            MaxWidth = 250
+            LookupParams.KeyFieldNames = 'dedu_acre_id'
+            LookupParams.LookupDataSet = otAgent_Cred
+            LookupParams.LookupDisplayFieldName = 'acre_nombre'
+            LookupParams.LookupKeyFieldNames = 'acre_id'
             Title.Caption = 'Agente Crediticio'
-            Width = 250
+            Width = 200
           end
           item
             CellButtons = <>
             DisplayFormat = 'DD/MM/YYYY'
             DynProps = <>
             EditButtons = <>
-            FieldName = 'fecha_ingreso'
+            FieldName = 'deduc_fecha_inicio'
             Footers = <>
             MaxWidth = 100
             Title.Caption = 'Fecha Registro'
@@ -1602,19 +1621,27 @@ object fMant_Personal: TfMant_Personal
           end
           item
             CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'deduc_fecha_fin'
+            Footers = <>
+            Title.Caption = 'Fecha Fin'
+          end
+          item
+            CellButtons = <>
             DisplayFormat = '###,###,##0.00'
             DynProps = <>
             EditButtons = <>
-            FieldName = 'monto_adeudado'
+            FieldName = 'dedu_mont_deuda'
             Footer.Alignment = taRightJustify
             Footer.DisplayFormat = '###,###,##0.00'
-            Footer.FieldName = 'monto_adeudado'
+            Footer.FieldName = 'dedu_mont_deuda'
             Footer.Value = '0.00'
             Footer.ValueType = fvtSum
             Footers = <>
             MaxWidth = 100
             Title.Alignment = taRightJustify
-            Title.Caption = 'Monto Adeudado'
+            Title.Caption = 'Monto adeudado'
             Width = 100
           end
           item
@@ -1622,25 +1649,50 @@ object fMant_Personal: TfMant_Personal
             DisplayFormat = '###,###,##0.00'
             DynProps = <>
             EditButtons = <>
-            FieldName = 'monto_pagado'
+            FieldName = 'dedu_mont_pagad'
+            Footer.DisplayFormat = '###,###,##0.00'
+            Footer.FieldName = 'dedu_mont_pagad'
+            Footer.ValueType = fvtSum
+            Footers = <>
+            Title.Caption = 'Monto pagado'
+          end
+          item
+            CellButtons = <>
+            DisplayFormat = '###,###,##0.00'
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'dedu_mont_mens'
             Footer.Alignment = taRightJustify
             Footer.DisplayFormat = '###,###,##0.00'
-            Footer.FieldName = 'monto_pagado'
+            Footer.FieldName = 'dedu_mont_mens'
             Footer.Value = '0.00'
             Footer.ValueType = fvtSum
             Footers = <>
             MaxWidth = 100
             Title.Alignment = taRightJustify
-            Title.Caption = 'Monto Pagado'
+            Title.Caption = 'Desc. Mensual'
             Width = 100
+          end
+          item
+            CellButtons = <>
+            DynProps = <>
+            EditButtons = <>
+            FieldName = 'deduc_tipo'
+            Footers = <>
+            LookupParams.KeyFieldNames = 'deduc_tipo'
+            LookupParams.LookupDataSet = MemTableEh1
+            LookupParams.LookupDisplayFieldName = 'descripcion'
+            LookupParams.LookupKeyFieldNames = 'tipo'
+            Title.Caption = 'Tipo Obligaci'#243'n'
+            Width = 164
           end>
         object RowDetailData: TRowDetailPanelControlEh
         end
       end
       object oBtn_Adm_Acr: TPngBitBtn
         Tag = 1
-        Left = 520
-        Top = 314
+        Left = 536
+        Top = 301
         Width = 161
         Height = 33
         Caption = 'Administrar Acreedores'
@@ -1818,17 +1870,99 @@ object fMant_Personal: TfMant_Personal
   object otAgent_Cred: TFDTable
     BeforePost = otPersonalBeforePost
     BeforeRefresh = otPersonalBeforeRefresh
-    IndexName = 'codigo'
+    IndexName = 'acre_id'
     Connection = oConection
     UpdateOptions.UpdateTableName = 'agentes_credito'
     TableName = 'agentes_credito'
     Left = 402
-    Top = 362
+    Top = 426
   end
   object oDs_Agent_Cred: TDataSource
     AutoEdit = False
     DataSet = otAgent_Cred
     Left = 320
-    Top = 362
+    Top = 426
+  end
+  object otPpersonal_deduc: TFDTable
+    BeforePost = otPersonalBeforePost
+    BeforeRefresh = otPersonalBeforeRefresh
+    IndexFieldNames = 'autoinc'
+    Connection = oConection
+    UpdateOptions.UpdateTableName = 'personal_deduc'
+    TableName = 'personal_deduc'
+    Left = 402
+    Top = 370
+  end
+  object oDs_Personal_deduc: TDataSource
+    AutoEdit = False
+    DataSet = otPpersonal_deduc
+    Left = 320
+    Top = 370
+  end
+  object MemTableEh1: TMemTableEh
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'tipo'
+        DataType = ftInteger
+        Precision = 15
+      end
+      item
+        Name = 'descripcion'
+        DataType = ftString
+        Size = 60
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 568
+    Top = 448
+    object MemTableEh1tipo: TIntegerField
+      FieldName = 'tipo'
+    end
+    object MemTableEh1descripcion: TStringField
+      FieldName = 'descripcion'
+      Size = 60
+    end
+    object MemTableData: TMemTableDataEh
+      object DataStruct: TMTDataStructEh
+        object tipo: TMTNumericDataFieldEh
+          FieldName = 'tipo'
+          NumericDataType = fdtIntegerEh
+          AutoIncrement = False
+          currency = False
+          Precision = 15
+        end
+        object descripcion: TMTStringDataFieldEh
+          FieldName = 'descripcion'
+          StringDataType = fdtStringEh
+          Size = 60
+        end
+      end
+      object RecordsList: TRecordsListEh
+        Data = (
+          (
+            1
+            'PRESTAMO PERSONAL')
+          (
+            2
+            'PRESTAMO HIPOTECARIO')
+          (
+            3
+            'AHORRO NAVIDAD')
+          (
+            4
+            'HIPOTECA DE VIVIENDA')
+          (
+            5
+            'DESCUENTO MUEBLERIA')
+          (
+            6
+            'PRESTAMO DE AUTO')
+          (
+            7
+            'DESCUENTO OTROS'))
+      end
+    end
   end
 end

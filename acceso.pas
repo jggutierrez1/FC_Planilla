@@ -16,7 +16,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef,
-  FireDAC.VCLUI.Wait, acPNG;
+  FireDAC.VCLUI.Wait;
 
 type
   TFacceso = class(TForm)

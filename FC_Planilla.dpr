@@ -27,7 +27,8 @@ uses
   acceso1 in 'acceso1.pas' {facceso1},
   imp_fijos in 'imp_fijos.pas' {fImp_fijos},
   Mant_Personal in 'Mant_Personal.pas' {fMant_Personal},
-  Mant_Acreedores in 'Mant_Acreedores.pas' {fMant_Acreedores};
+  Mant_Acreedores in 'Mant_Acreedores.pas' {fMant_Acreedores},
+  planilla_remesa in 'planilla_remesa.pas' {fplanilla_remesa};
 
 {$R *.res}
 
