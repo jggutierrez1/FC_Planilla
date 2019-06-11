@@ -1,5 +1,5 @@
 unit Empresa;
-
+
 interface
 
 uses
@@ -64,6 +64,15 @@ type
     oBtn_Rep: TBitBtn;
     oConection: TFDConnection;
     otEmpresa: TFDTable;
+    TabSheet2: TTabSheet;
+    oFecha_Alta: TDBDateTimeEditEh;
+    DBEdit1: TDBEdit;
+    oFecha_Mof: TDBDateTimeEditEh;
+    DBEdit2: TDBEdit;
+    Label16: TLabel;
+    Label32: TLabel;
+    Label17: TLabel;
+    Label33: TLabel;
     procedure Action_Control(pOption: integer);
     procedure oBtnNewClick(Sender: TObject);
     procedure oBtnEditClick(Sender: TObject);
@@ -157,7 +166,8 @@ begin
     exit;
   end;
   self.Action_Control(3);
-  nResp := MessageDlg('Seguro que desea borrar eliminar el registro alctual?', mtConfirmation, [mbYes, mbNo], 0);
+  nResp := MessageDlg('Seguro que desea borrar eliminar el registro alctual?',
+    mtConfirmation, [mbYes, mbNo], 0);
   If (nResp = mrYes) Then
   begin
     self.oDBNav.DataSource.DataSet.Delete;
@@ -201,14 +211,18 @@ begin
   BuscarGenM2.oListData[2].LLave := false;
 
   fBuscarGenM2.oSql1.Clear;
-  fBuscarGenM2.oSql1.Lines.Add('SELECT emp_id,UCASE(emp_descripcion) as emp_descripcion FROM empresas WHERE 1=1 ');
+  fBuscarGenM2.oSql1.Lines.Add
+    ('SELECT emp_id,UCASE(emp_descripcion) as emp_descripcion FROM empresas WHERE 1=1 ');
   fBuscarGenM2.ShowModal;
   if BuscarGenM2.vFindResult <> '' then
-    self.oDBNav.DataSource.DataSet.Locate('emp_id', BuscarGenM2.vFindResult, []);
+    self.oDBNav.DataSource.DataSet.Locate('emp_id',
+      BuscarGenM2.vFindResult, []);
   freeandnil(fBuscarGenM2);
 end;
 
 procedure TfEmpresa.oBtnNewClick(Sender: TObject);
+var
+  cNext: string;
 begin
   self.PageControl1.ActivePageIndex := 0;
   self.otEmpresa.Insert;
@@ -217,6 +231,11 @@ begin
   self.Activa_Objetos(true);
   self.otEmpresa.FieldByName('emp_inactivo').Value := 0;
   self.oID.Visible := false;
+
+  cNext := futilesv20.query_selectgen_result
+    ('SELECT IFNULL(no_calendario,0)+1 AS no_calendario FROM nume_trans LIMIT 1');
+  self.otEmpresa.FieldByName('emp_id').AsString := cNext;
+
   self.oNombre.SetFocus;
 end;
 
@@ -243,7 +262,8 @@ begin
   chosenDirectory := ExtractFilePath(ParamStr(0));
   if SelectDirectory('Seleccione una carpeta.', '', cCarpeta) then
   begin
-    self.oDBNav.DataSource.DataSet.FieldByName('emp_carpeta_reportes').Value := trim(cCarpeta);
+    self.oDBNav.DataSource.DataSet.FieldByName('emp_carpeta_reportes').Value :=
+      trim(cCarpeta);
     self.oReporte.SetFocus;
   end
   else
@@ -358,12 +378,15 @@ begin
 end;
 
 procedure TfEmpresa.otEmpresaBeforePost(DataSet: TDataSet);
+var
+  cNext: string;
 begin
   if DataSet.State in [dsEdit, dsInsert] then
   begin
     if futilesv20.isEmpty(DataSet.FieldByName('emp_descripcion').AsString) then
     begin
-      ShowMessage('Para crear una empresa es necesario por lo menos el nombre de la Empresa.');
+      ShowMessage
+        ('Para crear una empresa es necesario por lo menos el nombre de la Empresa.');
       self.PageControl1.TabIndex := 0;
       self.oNombre.SetFocus;
       abort;
@@ -376,6 +399,10 @@ begin
     end
     else if DataSet.State = dsInsert then
     begin
+      cNext := futilesv20.query_selectgen_result
+        ('SELECT IFNULL(no_calendario,0)+1 AS no_calendario FROM nume_trans LIMIT 1');
+      DataSet.FieldByName('emp_id').AsString := cNext;
+
       DataSet.FieldByName('u_usuario_alta').AsString := utilesv20.sUserName;
       DataSet.FieldByName('emp_fecha_alta').Value := now();
     end;
@@ -450,3 +477,4 @@ begin
 end;
 
 end.
+

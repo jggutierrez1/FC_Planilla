@@ -3,12 +3,18 @@ unit Mant_Personal;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls,
-  Vcl.Buttons, PngBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls, DBGridEh, DBCtrlsEh, DBLookupEh, Vcl.ExtDlgs, DateUtils,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls,
+  Vcl.Buttons, PngBitBtn, Vcl.ExtCtrls, Vcl.DBCtrls, Vcl.Mask, Vcl.ComCtrls,
+  DBGridEh, DBCtrlsEh, DBLookupEh, Vcl.ExtDlgs, DateUtils,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh,
   ResizeKit, MemTableDataEh, MemTableEh;
 
 type
@@ -85,7 +91,6 @@ type
     Label25: TLabel;
     oPer_fecha_finrela: TDBDateTimeEditEh;
     otNombre_Full: TEdit;
-    otSecuenc: TFDTable;
     DBGridEh1: TDBGridEh;
     otAgent_Cred: TFDTable;
     oDs_Agent_Cred: TDataSource;
@@ -98,6 +103,15 @@ type
     Label7: TLabel;
     DBNumberEditEh1: TDBNumberEditEh;
     PngBitBtn1: TPngBitBtn;
+    TabSheet4: TTabSheet;
+    Label18: TLabel;
+    oFecha_Alta: TDBDateTimeEditEh;
+    Label32: TLabel;
+    DBEdit1: TDBEdit;
+    Label26: TLabel;
+    oFecha_Mof: TDBDateTimeEditEh;
+    Label33: TLabel;
+    DBEdit2: TDBEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Activa_Objetos(bPar: boolean);
@@ -142,11 +156,9 @@ begin
   // self.ResizeKit1.Enabled := utiles.Ctrl_Resize;
   self.PageControl1.ActivePageIndex := 0;
   self.otPersonal.Connection := futilesv20.oPublicCnn;
-  self.otSecuenc.Connection := futilesv20.oPublicCnn;
   self.otPpersonal_deduc.Connection := futilesv20.oPublicCnn;
   self.otAgent_Cred.Connection := futilesv20.oPublicCnn;
   self.otPersonal.Active := true;
-  self.otSecuenc.Active := true;
   self.otAgent_Cred.Active := true;
   self.otPpersonal_deduc.Active := true;
   self.oDS_Personal.Enabled := true;
@@ -182,7 +194,8 @@ begin
   end;
   self.iOption := 3;
   self.Action_Control(3);
-  nResp := MessageDlg('Seguro que desea borrar eliminar el registro alctual?', mtConfirmation, [mbYes, mbNo], 0);
+  nResp := MessageDlg('Seguro que desea borrar eliminar el registro alctual?',
+    mtConfirmation, [mbYes, mbNo], 0);
   If (nResp = mrYes) Then
   begin
     self.oDBNav.DataSource.DataSet.Delete;
@@ -261,7 +274,8 @@ begin
 
   fBuscarGenM2.ShowModal;
   if BuscarGenM2.vFindResult <> '' then
-    self.oDBNav.DataSource.DataSet.Locate('per_id', BuscarGenM2.vFindResult, []);
+    self.oDBNav.DataSource.DataSet.Locate('per_id',
+      BuscarGenM2.vFindResult, []);
   freeandnil(fBuscarGenM2);
 end;
 
@@ -280,9 +294,10 @@ begin
   self.oPer_nom_primer.SetFocus;
 
   self.otPersonal.FieldByName('acre_inactivo').Value := 0;
-  cNext := futilesv20.query_selectgen_result('SELECT IFNULL(no_acreedor,0)+1 AS no_acreedor FROM nume_trans LIMIT 1');
+  cNext := futilesv20.query_selectgen_result
+    ('SELECT LPAD(IFNULL(no_acreedor,0)+1,6,"0") AS no_acreedor FROM nume_trans LIMIT 1');
   self.otPersonal.FieldByName('per_id').AsString := trim(cNext);
-  self.otPersonal.FieldByName('per_num').AsString := futilesv20.PadL(trim(cNext), 6, '0');
+  self.otPersonal.FieldByName('per_num').AsString := trim(cNext);
 
   self.oPer_num.Enabled := true;
 end;
@@ -293,9 +308,11 @@ var
 begin
   if (self.iOption = 1) then
   begin
-    cNext := futilesv20.query_selectgen_result('SELECT IFNULL(no_personal,0)+1 AS no_personal FROM nume_trans LIMIT 1');
+    cNext := futilesv20.query_selectgen_result
+      ('SELECT IFNULL(no_personal,0)+1 AS no_personal FROM nume_trans LIMIT 1');
     self.otPersonal.FieldByName('per_id').AsString := trim(cNext);
-    utilesv20.Execute_SQL_Command('UPDATE nume_trans SET no_personal=IFNULL(no_personal,0)+1 WHERE 1=1');
+    utilesv20.Execute_SQL_Command
+      ('UPDATE nume_trans SET no_personal=IFNULL(no_personal,0)+1 WHERE 1=1');
   end;
 
   self.otPersonal.Post;
@@ -352,6 +369,8 @@ begin
 end;
 
 procedure TfMant_Personal.otPersonalBeforePost(DataSet: TDataSet);
+var
+  cNext: string;
 begin
   if (DataSet.State = dsedit) then
   begin
@@ -360,7 +379,9 @@ begin
   end
   else if (DataSet.State = dsInsert) then
   begin
-    DataSet.FieldByName('per_id').AsInteger := self.otSecuenc.FieldByName('no_personal').AsInteger + 1;
+    cNext := futilesv20.query_selectgen_result
+      ('SELECT LPAD(IFNULL(no_acreedor,0)+1,6,"0") AS no_acreedor FROM nume_trans LIMIT 1');
+    DataSet.FieldByName('per_id').AsString := trim(cNext);
     DataSet.FieldByName('per_usuario_modif').AsString := utilesv20.sUserName;
     DataSet.FieldByName('per_usuario_alta').AsString := utilesv20.sUserName;
     DataSet.FieldByName('per_fecha_modif').Value := now();
@@ -461,9 +482,11 @@ begin
   else
     self.oImage.Picture := nil;
 
-  self.otNombre_Full.Text := trim(self.otPersonal.FieldByName('per_nom_primer').AsString) + ', ' +
-    trim(self.otPersonal.FieldByName('per_apell_paterno').AsString);
-  self.oEdad.Value := YearOf(now()) - YearOf(self.otPersonal.FieldByName('per_fecha_nac').AsDateTime);
+  self.otNombre_Full.Text := trim(self.otPersonal.FieldByName('per_nom_primer')
+    .AsString) + ', ' + trim(self.otPersonal.FieldByName('per_apell_paterno')
+    .AsString);
+  self.oEdad.Value := YearOf(now()) -
+    YearOf(self.otPersonal.FieldByName('per_fecha_nac').AsDateTime);
 end;
 
 procedure TfMant_Personal.Enabled_Screen(bFlag: boolean);

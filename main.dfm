@@ -75,7 +75,7 @@ object fMain: TfMain
     Font.Height = -13
     Font.Name = 'Segoe UI'
     Font.Style = []
-    ActiveGroupIndex = 3
+    ActiveGroupIndex = 0
     TabOrder = 1
     LookAndFeelSchemes.Flat = 8
     LookAndFeelSchemes.Standard = 8
@@ -156,6 +156,9 @@ object fMain: TfMain
       TopVisibleLinkIndex = 0
       Links = <
         item
+          Item = oOpt_Calendar
+        end
+        item
           Item = oOpt_Mant_Emp
         end
         item
@@ -235,6 +238,10 @@ object fMain: TfMain
     object oOpt_Mant_Prov: TdxNavBarItem
       Caption = 'Ficha Acreedores'
       OnClick = oOpt_Mant_ProvClick
+    end
+    object oOpt_Calendar: TdxNavBarItem
+      Caption = 'Calendario'
+      OnClick = oOpt_CalendarClick
     end
   end
 end

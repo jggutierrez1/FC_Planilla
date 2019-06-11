@@ -28,7 +28,8 @@ uses
   imp_fijos in 'imp_fijos.pas' {fImp_fijos},
   Mant_Personal in 'Mant_Personal.pas' {fMant_Personal},
   Mant_Acreedores in 'Mant_Acreedores.pas' {fMant_Acreedores},
-  planilla_remesa in 'planilla_remesa.pas' {fplanilla_remesa};
+  planilla_remesa in 'planilla_remesa.pas' {fplanilla_remesa},
+  gen_calendario in 'Gen_Calendario.pas' {fGen_Calendario};
 
 {$R *.res}
 

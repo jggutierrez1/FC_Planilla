@@ -594,6 +594,96 @@ object fEmpresa: TfEmpresa
         OnClick = oBtn_RepClick
       end
     end
+    object TabSheet2: TTabSheet
+      Caption = 'Auditor'#237'a'
+      ImageIndex = 1
+      object Label16: TLabel
+        Left = 27
+        Top = 32
+        Width = 81
+        Height = 17
+        Caption = 'Fecha de Alta:'
+      end
+      object Label32: TLabel
+        Left = 27
+        Top = 64
+        Width = 80
+        Height = 17
+        Caption = 'Usuario Creo:'
+      end
+      object Label17: TLabel
+        Left = 27
+        Top = 96
+        Width = 91
+        Height = 17
+        Caption = 'Fecha '#218'lt. Mod.'
+      end
+      object Label33: TLabel
+        Left = 27
+        Top = 128
+        Width = 104
+        Height = 17
+        Caption = 'Usuario Modific'#243':'
+      end
+      object oFecha_Alta: TDBDateTimeEditEh
+        Tag = 3
+        Left = 141
+        Top = 34
+        Width = 141
+        Height = 25
+        DataField = 'emp_fecha_alta'
+        DataSource = oDS_Empresa
+        DynProps = <>
+        Enabled = False
+        EditButtons = <>
+        Kind = dtkDateTimeEh
+        ReadOnly = True
+        TabOrder = 0
+        Visible = True
+      end
+      object DBEdit1: TDBEdit
+        Tag = 3
+        Left = 139
+        Top = 61
+        Width = 217
+        Height = 25
+        CharCase = ecUpperCase
+        DataField = 'u_usuario_alta'
+        DataSource = oDS_Empresa
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object oFecha_Mof: TDBDateTimeEditEh
+        Tag = 3
+        Left = 139
+        Top = 93
+        Width = 143
+        Height = 25
+        DataField = 'emp_fecha_modif'
+        DataSource = oDS_Empresa
+        DynProps = <>
+        Enabled = False
+        EditButtons = <>
+        Kind = dtkDateTimeEh
+        ReadOnly = True
+        TabOrder = 2
+        Visible = True
+      end
+      object DBEdit2: TDBEdit
+        Tag = 3
+        Left = 139
+        Top = 125
+        Width = 219
+        Height = 25
+        CharCase = ecUpperCase
+        DataField = 'u_usuario_modif'
+        DataSource = oDS_Empresa
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 3
+      end
+    end
   end
   object StatusBar1: TStatusBar
     Left = 0
@@ -947,7 +1037,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnSave: TPngBitBtn
     Tag = 6
-    Left = 486
+    Left = 480
     Top = 379
     Width = 110
     Height = 57
@@ -1604,7 +1694,7 @@ object fEmpresa: TfEmpresa
   end
   object oConection: TFDConnection
     Params.Strings = (
-      'Database=one2009_1'
+      'Database=fc_planilla'
       'User_Name=root'
       'CharacterSet=utf8'
       'DriverID=MySQL')

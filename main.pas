@@ -42,6 +42,7 @@ type
     oOpt_Salir: TdxNavBarItem;
     oOpt_Mant_Emp: TdxNavBarItem;
     oOpt_Mant_Prov: TdxNavBarItem;
+    oOpt_Calendar: TdxNavBarItem;
 
     procedure FormCreate(Sender: TObject);
     procedure Usuarios1Click(Sender: TObject);
@@ -57,6 +58,7 @@ type
     procedure oOpt_SalirClick(Sender: TObject);
     procedure oOpt_Mant_EmpClick(Sender: TObject);
     procedure oOpt_Mant_ProvClick(Sender: TObject);
+    procedure oOpt_CalendarClick(Sender: TObject);
   private
     { Private declarations }
     FGraphic: TGraphic;
@@ -70,11 +72,19 @@ var
 implementation
 
 uses
-  acceso, About, Empresa, UtilesV20, usuarios, Base64, Imp_fijos, Mant_Personal,
-  Mant_Acreedores, planilla_remesa;
+  acceso, About, Empresa, UtilesV20, usuarios, Base64,
+  Imp_fijos, Mant_Personal, Mant_Acreedores,
+  planilla_remesa, gen_calendario;
 {$R *.dfm}
 
 // Database_Backup_Restore,
+procedure TfMain.oOpt_CalendarClick(Sender: TObject);
+begin
+  Application.CreateForm(Tfgen_calendario, fgen_calendario);
+  fgen_calendario.ShowModal;
+  freeandnil(fgen_calendario);
+end;
+
 procedure TfMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   FGraphic.free;
@@ -213,8 +223,7 @@ begin
   freeandnil(Fusuarios);
 end;
 
-function TfMain.CropRect(const Dest: TRect;
-  SrcWidth, SrcHeight: Integer): TRect;
+function TfMain.CropRect(const Dest: TRect; SrcWidth, SrcHeight: Integer): TRect;
 var
   W: Integer;
   H: Integer;

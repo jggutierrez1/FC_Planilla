@@ -1170,7 +1170,6 @@ object fMant_Personal: TfMant_Personal
     TabOrder = 10
     object TabSheet1: TTabSheet
       Caption = 'Info. General'
-      ExplicitLeft = 0
       object Label1: TLabel
         Left = 9
         Top = 8
@@ -1580,7 +1579,6 @@ object fMant_Personal: TfMant_Personal
     object TabSheet2: TTabSheet
       Caption = 'Deducciones'
       ImageIndex = 1
-      ExplicitLeft = 0
       object DBGridEh1: TDBGridEh
         Left = 3
         Top = 3
@@ -1804,6 +1802,96 @@ object fMant_Personal: TfMant_Personal
         TabOrder = 1
       end
     end
+    object TabSheet4: TTabSheet
+      Caption = 'Auditor'#237'a'
+      ImageIndex = 3
+      object Label18: TLabel
+        Left = 27
+        Top = 32
+        Width = 74
+        Height = 15
+        Caption = 'Fecha de Alta:'
+      end
+      object Label32: TLabel
+        Left = 27
+        Top = 64
+        Width = 71
+        Height = 15
+        Caption = 'Usuario Creo:'
+      end
+      object Label26: TLabel
+        Left = 27
+        Top = 96
+        Width = 83
+        Height = 15
+        Caption = 'Fecha '#218'lt. Mod.'
+      end
+      object Label33: TLabel
+        Left = 27
+        Top = 128
+        Width = 94
+        Height = 15
+        Caption = 'Usuario Modific'#243':'
+      end
+      object oFecha_Alta: TDBDateTimeEditEh
+        Tag = 3
+        Left = 140
+        Top = 34
+        Width = 142
+        Height = 23
+        DataField = 'per_fecha_alta'
+        DataSource = oDS_Personal
+        DynProps = <>
+        Enabled = False
+        EditButtons = <>
+        Kind = dtkDateTimeEh
+        ReadOnly = True
+        TabOrder = 0
+        Visible = True
+      end
+      object DBEdit1: TDBEdit
+        Tag = 3
+        Left = 140
+        Top = 64
+        Width = 217
+        Height = 23
+        CharCase = ecUpperCase
+        DataField = 'per_usuario_alta'
+        DataSource = oDS_Personal
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object oFecha_Mof: TDBDateTimeEditEh
+        Tag = 3
+        Left = 140
+        Top = 94
+        Width = 143
+        Height = 23
+        DataField = 'per_fecha_modif'
+        DataSource = oDS_Personal
+        DynProps = <>
+        Enabled = False
+        EditButtons = <>
+        Kind = dtkDateTimeEh
+        ReadOnly = True
+        TabOrder = 2
+        Visible = True
+      end
+      object DBEdit2: TDBEdit
+        Tag = 3
+        Left = 140
+        Top = 125
+        Width = 219
+        Height = 23
+        CharCase = ecUpperCase
+        DataField = 'per_usuario_modif'
+        DataSource = oDS_Personal
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 3
+      end
+    end
   end
   object oCk_Status: TDBCheckBoxEh
     Left = 266
@@ -1840,11 +1928,13 @@ object fMant_Personal: TfMant_Personal
       'User_Name=root'
       'CharacterSet=utf8'
       'DriverID=MySQL')
+    Connected = True
     LoginPrompt = False
     Left = 13
     Top = 450
   end
   object otPersonal: TFDTable
+    Active = True
     BeforePost = otPersonalBeforePost
     BeforeRefresh = otPersonalBeforeRefresh
     IndexName = 'PRIMARY'
@@ -1857,15 +1947,6 @@ object fMant_Personal: TfMant_Personal
   object OpenTextFileDialog1: TOpenTextFileDialog
     Left = 560
     Top = 520
-  end
-  object otSecuenc: TFDTable
-    BeforeRefresh = otPersonalBeforeRefresh
-    IndexName = 'PRIMARY'
-    Connection = oConection
-    UpdateOptions.UpdateTableName = 'nume_trans'
-    TableName = 'nume_trans'
-    Left = 218
-    Top = 466
   end
   object otAgent_Cred: TFDTable
     BeforePost = otPersonalBeforePost
