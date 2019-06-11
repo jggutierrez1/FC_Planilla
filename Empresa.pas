@@ -27,22 +27,22 @@ type
     oActivo: TDBCheckBox;
     Label5: TLabel;
     Label3: TLabel;
-    oNombre: TDBEdit;
+    oemp_descripcion: TDBEdit;
     Label4: TLabel;
-    oRuc: TDBEdit;
-    oDV: TDBEdit;
+    oemp_ruc: TDBEdit;
+    oemp_dv: TDBEdit;
     Label2: TLabel;
-    oTel1: TDBEdit;
-    oTel2: TDBEdit;
-    oFax: TDBEdit;
+    oemp_telefono1: TDBEdit;
+    oemp_telefono2: TDBEdit;
+    oemp_fax: TDBEdit;
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
     Label10: TLabel;
     Label11: TLabel;
-    oDireccion: TDBMemo;
-    oApartado: TDBMemo;
-    oEmail: TDBEdit;
+    oemp_direccion: TDBMemo;
+    oemp_apartado: TDBMemo;
+    oemp_email: TDBEdit;
     Label12: TLabel;
     oBtnExit: TPngBitBtn;
     oBtnAbort: TPngBitBtn;
@@ -52,23 +52,17 @@ type
     oBtnEdit: TPngBitBtn;
     oBtnNew: TPngBitBtn;
     oBtnPrint: TPngBitBtn;
-    oID: TDBEdit;
-    FileOpenDialog1: TFileOpenDialog;
-    Label13: TLabel;
-    Label14: TLabel;
-    oFecha_Crea: TDBDateTimeEditEh;
-    oFecha_Mod: TDBDateTimeEditEh;
-    OpenDialog1: TOpenDialog;
+    oemp_id: TDBEdit;
     Label6: TLabel;
     oReporte: TDBEdit;
     oBtn_Rep: TBitBtn;
     oConection: TFDConnection;
     otEmpresa: TFDTable;
     TabSheet2: TTabSheet;
-    oFecha_Alta: TDBDateTimeEditEh;
-    DBEdit1: TDBEdit;
-    oFecha_Mof: TDBDateTimeEditEh;
-    DBEdit2: TDBEdit;
+    oemp_fecha_alta: TDBDateTimeEditEh;
+    ou_usuario_alta: TDBEdit;
+    oemp_fecha_modif: TDBDateTimeEditEh;
+    ou_usuario_modif: TDBEdit;
     Label16: TLabel;
     Label32: TLabel;
     Label17: TLabel;
@@ -84,14 +78,14 @@ type
     procedure oBtnExitClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure oBtn_RepClick(Sender: TObject);
-    procedure oNombreKeyPress(Sender: TObject; var Key: Char);
-    procedure oRucKeyPress(Sender: TObject; var Key: Char);
-    procedure oTel1KeyPress(Sender: TObject; var Key: Char);
-    procedure oTel2KeyPress(Sender: TObject; var Key: Char);
-    procedure oFaxKeyPress(Sender: TObject; var Key: Char);
-    procedure oEmailKeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_descripcionKeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_rucKeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_telefono1KeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_telefono2KeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_faxKeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_emailKeyPress(Sender: TObject; var Key: Char);
     procedure oReporteKeyPress(Sender: TObject; var Key: Char);
-    procedure oDVKeyPress(Sender: TObject; var Key: Char);
+    procedure oemp_dvKeyPress(Sender: TObject; var Key: Char);
     procedure oJCJKeyPress(Sender: TObject; var Key: Char);
     procedure oSPACKeyPress(Sender: TObject; var Key: Char);
     procedure Activa_Objetos(bPar: boolean);
@@ -153,7 +147,6 @@ begin
   self.Action_Control(7);
   self.Activa_Objetos(false);
   self.PageControl1.ActivePageIndex := 0;
-  self.oID.Visible := true;
 end;
 
 procedure TfEmpresa.oBtnDeleteClick(Sender: TObject);
@@ -166,8 +159,7 @@ begin
     exit;
   end;
   self.Action_Control(3);
-  nResp := MessageDlg('Seguro que desea borrar eliminar el registro alctual?',
-    mtConfirmation, [mbYes, mbNo], 0);
+  nResp := MessageDlg('Seguro que desea borrar eliminar el registro alctual?', mtConfirmation, [mbYes, mbNo], 0);
   If (nResp = mrYes) Then
   begin
     self.oDBNav.DataSource.DataSet.Delete;
@@ -187,7 +179,7 @@ begin
   self.otEmpresa.Edit;
   self.Action_Control(2);
   self.Activa_Objetos(true);
-  self.oNombre.SetFocus;
+  self.oemp_descripcion.SetFocus;
 end;
 
 procedure TfEmpresa.oBtnExitClick(Sender: TObject);
@@ -211,12 +203,10 @@ begin
   BuscarGenM2.oListData[2].LLave := false;
 
   fBuscarGenM2.oSql1.Clear;
-  fBuscarGenM2.oSql1.Lines.Add
-    ('SELECT emp_id,UCASE(emp_descripcion) as emp_descripcion FROM empresas WHERE 1=1 ');
+  fBuscarGenM2.oSql1.Lines.Add('SELECT emp_id,UCASE(emp_descripcion) as emp_descripcion FROM empresas WHERE 1=1 ');
   fBuscarGenM2.ShowModal;
   if BuscarGenM2.vFindResult <> '' then
-    self.oDBNav.DataSource.DataSet.Locate('emp_id',
-      BuscarGenM2.vFindResult, []);
+    self.oDBNav.DataSource.DataSet.Locate('emp_id', BuscarGenM2.vFindResult, []);
   freeandnil(fBuscarGenM2);
 end;
 
@@ -230,13 +220,11 @@ begin
   self.Action_Control(1);
   self.Activa_Objetos(true);
   self.otEmpresa.FieldByName('emp_inactivo').Value := 0;
-  self.oID.Visible := false;
 
-  cNext := futilesv20.query_selectgen_result
-    ('SELECT IFNULL(no_calendario,0)+1 AS no_calendario FROM nume_trans LIMIT 1');
+  cNext := futilesv20.query_selectgen_result('SELECT IFNULL(no_empresa,0)+1 AS no_empresa FROM nume_trans LIMIT 1');
   self.otEmpresa.FieldByName('emp_id').AsString := cNext;
 
-  self.oNombre.SetFocus;
+  self.oemp_descripcion.SetFocus;
 end;
 
 procedure TfEmpresa.oBtnPrintClick(Sender: TObject);
@@ -251,7 +239,6 @@ begin
   self.Action_Control(6);
   self.Activa_Objetos(false);
   self.PageControl1.ActivePageIndex := 0;
-  self.oID.Visible := true;
 end;
 
 procedure TfEmpresa.oBtn_RepClick(Sender: TObject);
@@ -262,8 +249,7 @@ begin
   chosenDirectory := ExtractFilePath(ParamStr(0));
   if SelectDirectory('Seleccione una carpeta.', '', cCarpeta) then
   begin
-    self.oDBNav.DataSource.DataSet.FieldByName('emp_carpeta_reportes').Value :=
-      trim(cCarpeta);
+    self.oDBNav.DataSource.DataSet.FieldByName('emp_carpeta_reportes').Value := trim(cCarpeta);
     self.oReporte.SetFocus;
   end
   else
@@ -272,7 +258,7 @@ begin
   end;
 end;
 
-procedure TfEmpresa.oDVKeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_dvKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -281,7 +267,7 @@ begin
   end
 end;
 
-procedure TfEmpresa.oEmailKeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_emailKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -290,7 +276,7 @@ begin
   end
 end;
 
-procedure TfEmpresa.oFaxKeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_faxKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -322,7 +308,7 @@ begin
   end;
 end;
 
-procedure TfEmpresa.oNombreKeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_descripcionKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -340,7 +326,7 @@ begin
   end
 end;
 
-procedure TfEmpresa.oRucKeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_rucKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -349,7 +335,7 @@ begin
   end
 end;
 
-procedure TfEmpresa.oTel1KeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_telefono1KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -358,7 +344,7 @@ begin
   end
 end;
 
-procedure TfEmpresa.oTel2KeyPress(Sender: TObject; var Key: Char);
+procedure TfEmpresa.oemp_telefono2KeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then { if it's an enter key }
   begin
@@ -371,9 +357,6 @@ procedure TfEmpresa.otEmpresaAfterInsert(DataSet: TDataSet);
 begin
   DataSet.FieldByName('emp_direccion').Value := '';
   DataSet.FieldByName('emp_apartado').Value := '';
-  DataSet.FieldByName('emp_cargo_jcj').Value := 0;
-  DataSet.FieldByName('emp_cargo_spac').AsInteger := 0;
-  DataSet.FieldByName('emp_cargo_spac').AsInteger := 0;
   DataSet.FieldByName('emp_inactivo').Value := 0;
 end;
 
@@ -385,10 +368,9 @@ begin
   begin
     if futilesv20.isEmpty(DataSet.FieldByName('emp_descripcion').AsString) then
     begin
-      ShowMessage
-        ('Para crear una empresa es necesario por lo menos el nombre de la Empresa.');
+      ShowMessage('Para crear una empresa es necesario por lo menos el nombre de la Empresa.');
       self.PageControl1.TabIndex := 0;
-      self.oNombre.SetFocus;
+      self.oemp_descripcion.SetFocus;
       abort;
     end;
 
@@ -399,8 +381,7 @@ begin
     end
     else if DataSet.State = dsInsert then
     begin
-      cNext := futilesv20.query_selectgen_result
-        ('SELECT IFNULL(no_calendario,0)+1 AS no_calendario FROM nume_trans LIMIT 1');
+      cNext := futilesv20.query_selectgen_result('SELECT IFNULL(no_empresa,0)+1 AS no_empresa FROM nume_trans LIMIT 1');
       DataSet.FieldByName('emp_id').AsString := cNext;
 
       DataSet.FieldByName('u_usuario_alta').AsString := utilesv20.sUserName;
@@ -473,7 +454,6 @@ begin
     if (self.Components[i] is TDBCheckBox) then
       TDBCheckBox(self.Components[i]).Enabled := bPar;
   end;
-  self.oID.Enabled := false;
 end;
 
 end.

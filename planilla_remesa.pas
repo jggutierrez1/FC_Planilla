@@ -13,7 +13,7 @@ uses
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, DBGridEh, DBCtrlsEh,
   FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Mask, DBLookupEh, Data.DB,
   FireDAC.Comp.DataSet, Vcl.ComCtrls, EhLibVCL, GridsEh, DBAxisGridsEh,
-  Vcl.Buttons, PngBitBtn;
+  Vcl.Buttons, PngBitBtn, FireDAC.Stan.StorageBin;
 
 type
   Tfplanilla_remesa = class(TForm)
@@ -25,14 +25,16 @@ type
     olst_Empresa: TDBLookupComboboxEh;
     otEmpresa: TFDTable;
     oDs_Empresa: TDataSource;
-    oLst_Planilla: TDBComboBoxEh;
     Label3: TLabel;
     Label4: TLabel;
     oBtnSave: TPngBitBtn;
     oBtnAbort: TPngBitBtn;
     oBtnPrint: TPngBitBtn;
-    PngBitBtn1: TPngBitBtn;
     oBtnExit: TPngBitBtn;
+    PngBitBtn2: TPngBitBtn;
+    otFrecuencia_pago: TFDTable;
+    oDS_Frecuencia_pago: TDataSource;
+    oLst_Tipo_Plan: TDBLookupComboboxEh;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure oBtnExitClick(Sender: TObject);
@@ -58,6 +60,7 @@ begin
   freeandnil(oConection);
   self.otEmpresa.Connection := fUtilesV20.oPublicCnn;
   self.oQry_Planilla.Connection := fUtilesV20.oPublicCnn;
+  self.otFrecuencia_pago.Connection := fUtilesV20.oPublicCnn;
 
   self.oDs_Empresa.DataSet := otEmpresa;
   self.oDs_Empresa.Enabled := true;
@@ -65,15 +68,18 @@ begin
   self.oDs_Planilla.DataSet := oQry_Planilla;
   self.oDs_Planilla.Enabled := true;
 
+  self.oDS_Frecuencia_pago.DataSet := self.otFrecuencia_pago;
+
   self.otEmpresa.Active := true;
   self.oQry_Planilla.Active := true;
+  self.otFrecuencia_pago.Active := true;
 
 end;
 
 procedure Tfplanilla_remesa.FormShow(Sender: TObject);
 begin
   self.olst_Empresa.Value := 1;
-  self.oLst_Planilla.Value := 1;
+  self.oLst_Tipo_Plan.Value := 1;
 end;
 
 procedure Tfplanilla_remesa.oBtnExitClick(Sender: TObject);

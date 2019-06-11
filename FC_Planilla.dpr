@@ -25,11 +25,12 @@ uses
   UtilesV20 in 'UtilesV20.pas' {fUtilesV20},
   main in 'main.pas' {fMain},
   acceso1 in 'acceso1.pas' {facceso1},
-  imp_fijos in 'imp_fijos.pas' {fImp_fijos},
+  Mant_Imp_Fijos in 'Mant_Imp_Fijos.pas' {fMant_Imp_Fijos},
   Mant_Personal in 'Mant_Personal.pas' {fMant_Personal},
   Mant_Acreedores in 'Mant_Acreedores.pas' {fMant_Acreedores},
   planilla_remesa in 'planilla_remesa.pas' {fplanilla_remesa},
-  gen_calendario in 'Gen_Calendario.pas' {fGen_Calendario};
+  Gen_Calendario in 'Gen_Calendario.pas' {fGen_Calendario},
+  Mant_Frec_Pago in 'Mant_Frec_Pago.pas' {fMant_Frec_Pago};
 
 {$R *.res}
 

@@ -2,9 +2,10 @@ object fEmpresa: TfEmpresa
   Left = 252
   Top = 119
   BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsDialog
   Caption = 'Secci'#243'n de Mantenimiento [Empresas].'
-  ClientHeight = 517
-  ClientWidth = 713
+  ClientHeight = 527
+  ClientWidth = 723
   Color = clWhite
   DefaultMonitor = dmPrimary
   Font.Charset = DEFAULT_CHARSET
@@ -150,7 +151,7 @@ object fEmpresa: TfEmpresa
   PixelsPerInch = 96
   TextHeight = 17
   object oDBNav: TDBNavigator
-    Left = 199
+    Left = 204
     Top = 383
     Width = 316
     Height = 34
@@ -159,7 +160,7 @@ object fEmpresa: TfEmpresa
     TabOrder = 9
   end
   object PageControl1: TPageControl
-    Left = 9
+    Left = 13
     Top = 4
     Width = 697
     Height = 369
@@ -249,20 +250,6 @@ object fEmpresa: TfEmpresa
         Height = 15
         Caption = 'Email:'
       end
-      object Label13: TLabel
-        Left = 434
-        Top = 236
-        Width = 74
-        Height = 15
-        Caption = 'Fecha de Alta:'
-      end
-      object Label14: TLabel
-        Left = 425
-        Top = 278
-        Width = 83
-        Height = 15
-        Caption = 'Fecha '#218'lt. Mod.'
-      end
       object Label6: TLabel
         Left = 40
         Top = 278
@@ -271,8 +258,8 @@ object fEmpresa: TfEmpresa
         Caption = 'Ruta de reportes:'
       end
       object oActivo: TDBCheckBox
-        Left = 427
-        Top = 55
+        Left = 234
+        Top = 18
         Width = 100
         Height = 17
         Caption = 'Inactiva'
@@ -284,11 +271,11 @@ object fEmpresa: TfEmpresa
         Font.Name = 'MS Sans Serif'
         Font.Style = []
         ParentFont = False
-        TabOrder = 1
+        TabOrder = 11
         ValueChecked = '1'
         ValueUnchecked = '0'
       end
-      object oNombre: TDBEdit
+      object oemp_descripcion: TDBEdit
         Left = 135
         Top = 53
         Width = 261
@@ -299,10 +286,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 2
-        OnKeyPress = oNombreKeyPress
+        TabOrder = 1
+        OnKeyPress = oemp_descripcionKeyPress
       end
-      object oRuc: TDBEdit
+      object oemp_ruc: TDBEdit
         Left = 135
         Top = 90
         Width = 261
@@ -313,10 +300,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 3
-        OnKeyPress = oRucKeyPress
+        TabOrder = 2
+        OnKeyPress = oemp_rucKeyPress
       end
-      object oDV: TDBEdit
+      object oemp_dv: TDBEdit
         Left = 544
         Top = 90
         Width = 98
@@ -327,10 +314,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 4
-        OnKeyPress = oDVKeyPress
+        TabOrder = 3
+        OnKeyPress = oemp_dvKeyPress
       end
-      object oTel1: TDBEdit
+      object oemp_telefono1: TDBEdit
         Left = 135
         Top = 127
         Width = 98
@@ -341,10 +328,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 5
-        OnKeyPress = oTel1KeyPress
+        TabOrder = 4
+        OnKeyPress = oemp_telefono1KeyPress
       end
-      object oTel2: TDBEdit
+      object oemp_telefono2: TDBEdit
         Left = 323
         Top = 127
         Width = 98
@@ -355,10 +342,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 6
-        OnKeyPress = oTel2KeyPress
+        TabOrder = 5
+        OnKeyPress = oemp_telefono2KeyPress
       end
-      object oFax: TDBEdit
+      object oemp_fax: TDBEdit
         Left = 544
         Top = 127
         Width = 98
@@ -369,10 +356,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 7
-        OnKeyPress = oFaxKeyPress
+        TabOrder = 6
+        OnKeyPress = oemp_faxKeyPress
       end
-      object oDireccion: TDBMemo
+      object oemp_direccion: TDBMemo
         Left = 135
         Top = 165
         Width = 199
@@ -383,9 +370,9 @@ object fEmpresa: TfEmpresa
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 8
+        TabOrder = 7
       end
-      object oApartado: TDBMemo
+      object oemp_apartado: TDBMemo
         Left = 441
         Top = 162
         Width = 201
@@ -396,9 +383,9 @@ object fEmpresa: TfEmpresa
         ParentShowHint = False
         ScrollBars = ssVertical
         ShowHint = True
-        TabOrder = 9
+        TabOrder = 8
       end
-      object oEmail: TDBEdit
+      object oemp_email: TDBEdit
         Left = 135
         Top = 233
         Width = 261
@@ -409,10 +396,10 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 10
-        OnKeyPress = oEmailKeyPress
+        TabOrder = 9
+        OnKeyPress = oemp_emailKeyPress
       end
-      object oID: TDBEdit
+      object oemp_id: TDBEdit
         Left = 135
         Top = 15
         Width = 58
@@ -422,54 +409,9 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         Enabled = False
         ParentShowHint = False
+        ReadOnly = True
         ShowHint = True
         TabOrder = 0
-      end
-      object oFecha_Crea: TDBDateTimeEditEh
-        Left = 509
-        Top = 233
-        Width = 133
-        Height = 21
-        Hint = 'Fecha de alta del registro.'
-        DataField = 'emp_fecha_alta'
-        DataSource = oDS_Empresa
-        DynProps = <>
-        Enabled = False
-        EditButtons = <>
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Kind = dtkDateTimeEh
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 13
-        Visible = True
-      end
-      object oFecha_Mod: TDBDateTimeEditEh
-        Left = 509
-        Top = 275
-        Width = 133
-        Height = 21
-        Hint = 'Fecha de la '#218'ltima modificasi'#243'n.'
-        DataField = 'emp_fecha_modif'
-        DataSource = oDS_Empresa
-        DynProps = <>
-        Enabled = False
-        EditButtons = <>
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = []
-        Kind = dtkDateTimeEh
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 14
-        Visible = True
       end
       object oReporte: TDBEdit
         Left = 135
@@ -481,7 +423,7 @@ object fEmpresa: TfEmpresa
         DataSource = oDS_Empresa
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 11
+        TabOrder = 10
         OnKeyPress = oReporteKeyPress
       end
       object oBtn_Rep: TBitBtn
@@ -625,9 +567,9 @@ object fEmpresa: TfEmpresa
         Height = 17
         Caption = 'Usuario Modific'#243':'
       end
-      object oFecha_Alta: TDBDateTimeEditEh
+      object oemp_fecha_alta: TDBDateTimeEditEh
         Tag = 3
-        Left = 141
+        Left = 139
         Top = 34
         Width = 141
         Height = 25
@@ -641,10 +583,10 @@ object fEmpresa: TfEmpresa
         TabOrder = 0
         Visible = True
       end
-      object DBEdit1: TDBEdit
+      object ou_usuario_alta: TDBEdit
         Tag = 3
         Left = 139
-        Top = 61
+        Top = 64
         Width = 217
         Height = 25
         CharCase = ecUpperCase
@@ -654,10 +596,10 @@ object fEmpresa: TfEmpresa
         ReadOnly = True
         TabOrder = 1
       end
-      object oFecha_Mof: TDBDateTimeEditEh
+      object oemp_fecha_modif: TDBDateTimeEditEh
         Tag = 3
         Left = 139
-        Top = 93
+        Top = 94
         Width = 143
         Height = 25
         DataField = 'emp_fecha_modif'
@@ -670,7 +612,7 @@ object fEmpresa: TfEmpresa
         TabOrder = 2
         Visible = True
       end
-      object DBEdit2: TDBEdit
+      object ou_usuario_modif: TDBEdit
         Tag = 3
         Left = 139
         Top = 125
@@ -687,14 +629,16 @@ object fEmpresa: TfEmpresa
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 498
-    Width = 713
+    Top = 508
+    Width = 723
     Height = 19
     Panels = <>
+    ExplicitTop = 498
+    ExplicitWidth = 713
   end
   object oBtnExit: TPngBitBtn
     Tag = 8
-    Left = 596
+    Left = 601
     Top = 438
     Width = 109
     Height = 57
@@ -869,7 +813,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnAbort: TPngBitBtn
     Tag = 7
-    Left = 596
+    Left = 601
     Top = 379
     Width = 109
     Height = 57
@@ -1037,7 +981,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnSave: TPngBitBtn
     Tag = 6
-    Left = 480
+    Left = 485
     Top = 379
     Width = 110
     Height = 57
@@ -1132,7 +1076,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnFind: TPngBitBtn
     Tag = 4
-    Left = 337
+    Left = 342
     Top = 438
     Width = 109
     Height = 57
@@ -1282,7 +1226,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnDelete: TPngBitBtn
     Tag = 3
-    Left = 227
+    Left = 232
     Top = 438
     Width = 109
     Height = 57
@@ -1414,7 +1358,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnEdit: TPngBitBtn
     Tag = 2
-    Left = 117
+    Left = 122
     Top = 438
     Width = 109
     Height = 57
@@ -1523,7 +1467,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnNew: TPngBitBtn
     Tag = 1
-    Left = 8
+    Left = 13
     Top = 438
     Width = 109
     Height = 57
@@ -1583,7 +1527,7 @@ object fEmpresa: TfEmpresa
   end
   object oBtnPrint: TPngBitBtn
     Tag = 5
-    Left = 447
+    Left = 452
     Top = 438
     Width = 109
     Height = 57
@@ -1678,19 +1622,8 @@ object fEmpresa: TfEmpresa
   object oDS_Empresa: TDataSource
     AutoEdit = False
     DataSet = otEmpresa
-    Left = 120
+    Left = 125
     Top = 384
-  end
-  object FileOpenDialog1: TFileOpenDialog
-    FavoriteLinks = <>
-    FileTypes = <>
-    Options = []
-    Left = 256
-    Top = 336
-  end
-  object OpenDialog1: TOpenDialog
-    Left = 328
-    Top = 336
   end
   object oConection: TFDConnection
     Params.Strings = (
@@ -1699,7 +1632,7 @@ object fEmpresa: TfEmpresa
       'CharacterSet=utf8'
       'DriverID=MySQL')
     LoginPrompt = False
-    Left = 13
+    Left = 18
     Top = 384
   end
   object otEmpresa: TFDTable
@@ -1709,7 +1642,7 @@ object fEmpresa: TfEmpresa
     Connection = oConection
     UpdateOptions.UpdateTableName = 'empresas'
     TableName = 'empresas'
-    Left = 66
+    Left = 71
     Top = 384
   end
 end

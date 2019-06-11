@@ -43,6 +43,7 @@ type
     oOpt_Mant_Emp: TdxNavBarItem;
     oOpt_Mant_Prov: TdxNavBarItem;
     oOpt_Calendar: TdxNavBarItem;
+    oOpt_Frec_Pago: TdxNavBarItem;
 
     procedure FormCreate(Sender: TObject);
     procedure Usuarios1Click(Sender: TObject);
@@ -59,6 +60,7 @@ type
     procedure oOpt_Mant_EmpClick(Sender: TObject);
     procedure oOpt_Mant_ProvClick(Sender: TObject);
     procedure oOpt_CalendarClick(Sender: TObject);
+    procedure oOpt_Frec_PagoClick(Sender: TObject);
   private
     { Private declarations }
     FGraphic: TGraphic;
@@ -73,8 +75,8 @@ implementation
 
 uses
   acceso, About, Empresa, UtilesV20, usuarios, Base64,
-  Imp_fijos, Mant_Personal, Mant_Acreedores,
-  planilla_remesa, gen_calendario;
+  Mant_Imp_Fijos, Mant_Personal, Mant_Acreedores,
+  planilla_remesa, gen_calendario, Mant_Frec_Pago;
 {$R *.dfm}
 
 // Database_Backup_Restore,
@@ -107,11 +109,9 @@ begin
   else
   begin
     self.StatusBar1.Panels[0].Text := 'Usuario: ' + UtilesV20.sUserName;
-    self.StatusBar1.Panels[1].Text := 'Fecha: ' +
-      formatDateTime('dd/mm/yyyy', now());
+    self.StatusBar1.Panels[1].Text := 'Fecha: ' + formatDateTime('dd/mm/yyyy', now());
     self.StatusBar1.Panels[2].Text := 'Empresa: ' + facceso.oLst_emp.Text;
-    self.StatusBar1.Panels[3].Text := 'Servidor: ' +
-      fUtilesV20.oPublicCnn.Params.Values['Server'] + '/' +
+    self.StatusBar1.Panels[3].Text := 'Servidor: ' + fUtilesV20.oPublicCnn.Params.Values['Server'] + '/' +
       fUtilesV20.oPublicCnn.Params.Values['Database'];
     facceso.free;
   end;
@@ -177,6 +177,13 @@ begin
   messagedlg('Deducciones', mtError, mbOKCancel, 0);
 end;
 
+procedure TfMain.oOpt_Frec_PagoClick(Sender: TObject);
+begin
+  Application.CreateForm(TfMant_Frec_Pago, fMant_Frec_Pago);
+  fMant_Frec_Pago.ShowModal;
+  freeandnil(fMant_Frec_Pago);
+end;
+
 procedure TfMain.oOpt_Mant_EmpClick(Sender: TObject);
 begin
   Application.CreateForm(TfEmpresa, fEmpresa);
@@ -191,9 +198,9 @@ end;
 
 procedure TfMain.oOpt_Imp_FijosClick(Sender: TObject);
 begin
-  Application.CreateForm(TfImp_fijos, fImp_fijos);
-  fImp_fijos.ShowModal;
-  freeandnil(fImp_fijos);
+  Application.CreateForm(TfMant_Imp_Fijos, fMant_Imp_Fijos);
+  fMant_Imp_Fijos.ShowModal;
+  freeandnil(fMant_Imp_Fijos);
 end;
 
 procedure TfMain.oOpt_Mant_PersClick(Sender: TObject);
@@ -212,8 +219,7 @@ end;
 
 procedure TfMain.Usuarios1Click(Sender: TObject);
 begin
-  if (trim(UtilesV20.sUserName) <> 'ADMIN') and
-    (trim(UtilesV20.sUserName) <> 'SUPER') then
+  if (trim(UtilesV20.sUserName) <> 'ADMIN') and (trim(UtilesV20.sUserName) <> 'SUPER') then
   begin
     messagedlg('Usuario no tiene acceso a esta opción.', mtWarning, [mbOk], 0);
     exit;

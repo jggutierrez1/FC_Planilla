@@ -156,10 +156,13 @@ object fMain: TfMain
       TopVisibleLinkIndex = 0
       Links = <
         item
+          Item = oOpt_Mant_Emp
+        end
+        item
           Item = oOpt_Calendar
         end
         item
-          Item = oOpt_Mant_Emp
+          Item = oOpt_Frec_Pago
         end
         item
           Item = oOpt_Imp_Fijos
@@ -242,6 +245,10 @@ object fMain: TfMain
     object oOpt_Calendar: TdxNavBarItem
       Caption = 'Calendario'
       OnClick = oOpt_CalendarClick
+    end
+    object oOpt_Frec_Pago: TdxNavBarItem
+      Caption = 'Frecuencias de Pagos'
+      OnClick = oOpt_Frec_PagoClick
     end
   end
 end
